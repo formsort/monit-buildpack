@@ -86,7 +86,7 @@ done
 
 (cat monitrc | vendor/gettext/bin/envsubst) > monitrc.tmp && mv monitrc.tmp monitrc
 
-vendor/monit/bin/monit -c monitrc -p tmp/.monit.pid -s tmp/.monit.state -I -v
+vendor/monit/bin/monit -c monitrc -p tmp/.monit.pid -s tmp/.monit.state -v
 EOF
 chmod +x $BUILD_DIR/bin/boot.sh
 
