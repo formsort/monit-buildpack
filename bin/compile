@@ -6,7 +6,7 @@ MONIT_SOURCE="https://mmonit.com/monit/dist/monit-$MONIT_VERSION.tar.gz"
 MONIT_SOURCE_DIR="source/monit"
 MONIT_VENDOR="vendor/monit"
 
-GETTEXT_BINARY="https://github.com/formsort/monit-buildpack/blob/master/gettext-0.20.1.tgz?raw=true"
+GETTEXT_BINARY="https://github.com/formsort/monit-buildpack/blob/master/gettext-0.20.1.tar.gz?raw=true"
 GETTEXT_VENDOR="vendor/gettext"
 
 BUILD_DIR=$1
