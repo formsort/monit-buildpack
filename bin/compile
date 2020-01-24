@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-MONIT_VERSION="5.9"
+MONIT_VERSION="5.26.0"
 MONIT_SOURCE="https://mmonit.com/monit/dist/monit-$MONIT_VERSION.tar.gz"
 MONIT_SOURCE_DIR="source/monit"
 MONIT_VENDOR="vendor/monit"
 
-GETTEXT_BINARY="http://heroku-monit.s3.amazonaws.com/gettext-0.18.tgz"
+GETTEXT_BINARY="https://github.com/formsort/monit-buildpack/blob/master/gettext-0.18.tgz?raw=true"
 GETTEXT_VENDOR="vendor/gettext"
 
 BUILD_DIR=$1
