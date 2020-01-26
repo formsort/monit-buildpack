@@ -2,5 +2,8 @@
 
 cat << EOF
 ---
-bin/pre-web.sh updated, monit is ready to go 
+config_vars:
+  SYSTEM_NAME: web
+default_process_types:
+  web: bin/pre-web.sh && waitress-serve --port=$PORT wsgi:application
 EOF
