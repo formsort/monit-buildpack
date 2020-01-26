@@ -42,7 +42,7 @@ function check_requires_rebuild {
 
 # Check if source exists, if it does - don't re-build!
 # RECOMPILE_MONIT environment config can be set to override
-if [ $RECOMPILE_MONIT != 1 ]; then
+if [ "$RECOMPILE_MONIT" != "1" ]; then
   check_requires_rebuild
 else
   echo "-----> Explicit re-build requested, re-building"
