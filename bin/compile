@@ -6,7 +6,7 @@ MONIT_SOURCE="https://mmonit.com/monit/dist/monit-$MONIT_VERSION.tar.gz"
 MONIT_SOURCE_DIR="source/monit"
 MONIT_VENDOR="vendor/monit"
 
-GETTEXT_BINARY="https://github.com/formsort/monit-buildpack/blob/master/gettext-0.20.1.tar.gz?raw=true"
+GETTEXT_BINARY="https://github.com/formsort/bin-distro-dep/blob/master/gettext-0.20.1.tar.gz?raw=true"
 GETTEXT_VENDOR="vendor/gettext"
 
 BUILD_DIR=$1
@@ -67,15 +67,15 @@ curl $GETTEXT_BINARY -o - | tar -xz -C $BUILD_DIR/$GETTEXT_VENDOR -f -
 
 mkdir -p $BUILD_DIR/bin
 
-echo "-----> Generating the boot script"
-cat >>$BUILD_DIR/bin/boot.sh <<'EOF'
+echo "-----> Generating the pre-web script"
+cat >>$BUILD_DIR/bin/pre-web.sh <<'EOF'
 #!/usr/bin/env bash
 
 mkdir -p conf.d
 mkdir -p tmp/conf
 
 if [ "$SYSTEM_NAME" == "" ]; then
-  export SYSTEM_NAME=Heroku
+  export SYSTEM_NAME=web
 fi
 
 for f in `ls conf.d`
@@ -88,7 +88,7 @@ done
 
 vendor/monit/bin/monit -c monitrc -v
 EOF
-chmod +x $BUILD_DIR/bin/boot.sh
+chmod +x $BUILD_DIR/bin/pre-web.sh
 
 # Cache build for future
 echo $MONIT_VERSION > $CACHE_BUILD_VERSION_FILE
