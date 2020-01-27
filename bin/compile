@@ -81,10 +81,11 @@ fi
 for f in `ls conf.d`
 do
   echo "Processing conf.d/$f file..."
+  env | sort
   (cat  conf.d/$f | vendor/gettext/bin/envsubst) > tmp/conf/$f.tmp && mv tmp/conf/$f.tmp conf.d/$f
 done
 
-(cat monitrc | vendor/gettext/bin/envsubst) > monitrc.tmp && mv monitrc.tmp monitrc
+(cat monitrc | vendor/gettext/bin/envsubst) > monitrc.tmp && cp -f monitrc.tmp monitrc
 
 vendor/monit/bin/monit -c monitrc -v
 EOF
