@@ -66,7 +66,6 @@ mkdir -p $BUILD_DIR/$GETTEXT_VENDOR
 curl $GETTEXT_BINARY -o - | tar -xz -C $BUILD_DIR/$GETTEXT_VENDOR -f -
 
 mkdir -p $BUILD_DIR/bin
-rm -f $BUILD_DIR/bin/pre-web-monit.sh
 
 echo "-----> Generating the pre-web-monit script"
 cat >>$BUILD_DIR/bin/pre-web-monit.sh <<'EOF'
