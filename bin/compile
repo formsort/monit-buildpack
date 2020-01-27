@@ -6,7 +6,7 @@ MONIT_SOURCE="https://mmonit.com/monit/dist/monit-$MONIT_VERSION.tar.gz"
 MONIT_SOURCE_DIR="source/monit"
 MONIT_VENDOR="vendor/monit"
 
-GETTEXT_BINARY="https://raw.githubusercontent.com/formsort/bin-distro-dep/master/gettext-0.20.1.tar.gz?token=AADDZUERRKPSUCMWTHR4HNK6G6ZFA"
+GETTEXT_BINARY="http://heroku-monit.s3.amazonaws.com/gettext-0.18.tgz"
 GETTEXT_VENDOR="vendor/gettext"
 
 BUILD_DIR=$1
