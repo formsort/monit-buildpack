@@ -6,7 +6,7 @@ MONIT_SOURCE="https://mmonit.com/monit/dist/monit-$MONIT_VERSION.tar.gz"
 MONIT_SOURCE_DIR="source/monit"
 MONIT_VENDOR="vendor/monit"
 
-GETTEXT_BINARY="https://github.com/formsort/bin-distro-dep/blob/master/gettext-0.20.1.tar.gz?raw=true"
+GETTEXT_BINARY="https://raw.githubusercontent.com/formsort/bin-distro-dep/master/gettext-0.20.1.tar.gz?token=AADDZUERRKPSUCMWTHR4HNK6G6ZFA"
 GETTEXT_VENDOR="vendor/gettext"
 
 BUILD_DIR=$1
@@ -66,9 +66,10 @@ mkdir -p $BUILD_DIR/$GETTEXT_VENDOR
 curl $GETTEXT_BINARY -o - | tar -xz -C $BUILD_DIR/$GETTEXT_VENDOR -f -
 
 mkdir -p $BUILD_DIR/bin
+rm -f $BUILD_DIR/bin/pre-web.sh
 
-echo "-----> Generating the pre-web2 script"
-cat >>$BUILD_DIR/bin/pre-web2.sh <<'EOF'
+echo "-----> Generating the pre-web script"
+cat >>$BUILD_DIR/bin/pre-web.sh <<'EOF'
 #!/usr/bin/env bash
 
 mkdir -p conf.d
@@ -84,12 +85,11 @@ do
   (cat  conf.d/$f | vendor/gettext/bin/envsubst) > tmp/conf/$f.tmp && mv tmp/conf/$f.tmp conf.d/$f
 done
 
-(cat monitrc | vendor/gettext/bin/envsubst) > monitrc.tmp2
 (cat monitrc | vendor/gettext/bin/envsubst) > monitrc.tmp && mv monitrc.tmp monitrc
 
 vendor/monit/bin/monit -c monitrc -v
 EOF
-chmod +x $BUILD_DIR/bin/pre-web2.sh
+chmod +x $BUILD_DIR/bin/pre-web.sh
 
 # Cache build for future
 echo $MONIT_VERSION > $CACHE_BUILD_VERSION_FILE
