@@ -67,8 +67,8 @@ curl $GETTEXT_BINARY -o - | tar -xz -C $BUILD_DIR/$GETTEXT_VENDOR -f -
 
 mkdir -p $BUILD_DIR/bin
 
-echo "-----> Generating the pre-web script"
-cat >>$BUILD_DIR/bin/pre-web.sh <<'EOF'
+echo "-----> Generating the pre-web2 script"
+cat >>$BUILD_DIR/bin/pre-web2.sh <<'EOF'
 #!/usr/bin/env bash
 
 mkdir -p conf.d
@@ -81,15 +81,15 @@ fi
 for f in `ls conf.d`
 do
   echo "Processing conf.d/$f file..."
-  env | sort
   (cat  conf.d/$f | vendor/gettext/bin/envsubst) > tmp/conf/$f.tmp && mv tmp/conf/$f.tmp conf.d/$f
 done
 
-(cat monitrc | vendor/gettext/bin/envsubst) > monitrc.tmp && cp -f monitrc.tmp monitrc
+(cat monitrc | vendor/gettext/bin/envsubst) > monitrc.tmp2
+(cat monitrc | vendor/gettext/bin/envsubst) > monitrc.tmp && mv monitrc.tmp monitrc
 
 vendor/monit/bin/monit -c monitrc -v
 EOF
-chmod +x $BUILD_DIR/bin/pre-web.sh
+chmod +x $BUILD_DIR/bin/pre-web2.sh
 
 # Cache build for future
 echo $MONIT_VERSION > $CACHE_BUILD_VERSION_FILE
