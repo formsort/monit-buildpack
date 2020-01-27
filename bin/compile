@@ -66,10 +66,10 @@ mkdir -p $BUILD_DIR/$GETTEXT_VENDOR
 curl $GETTEXT_BINARY -o - | tar -xz -C $BUILD_DIR/$GETTEXT_VENDOR -f -
 
 mkdir -p $BUILD_DIR/bin
-rm -f $BUILD_DIR/bin/pre-web.sh
+rm -f $BUILD_DIR/bin/pre-web-monit.sh
 
-echo "-----> Generating the pre-web script"
-cat >>$BUILD_DIR/bin/pre-web.sh <<'EOF'
+echo "-----> Generating the pre-web-monit script"
+cat >>$BUILD_DIR/bin/pre-web-monit.sh <<'EOF'
 #!/usr/bin/env bash
 
 mkdir -p conf.d
@@ -89,7 +89,7 @@ done
 
 vendor/monit/bin/monit -c monitrc -v
 EOF
-chmod +x $BUILD_DIR/bin/pre-web.sh
+chmod +x $BUILD_DIR/bin/pre-web-monit.sh
 
 # Cache build for future
 echo $MONIT_VERSION > $CACHE_BUILD_VERSION_FILE
